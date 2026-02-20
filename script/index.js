@@ -1,3 +1,11 @@
+//removing active class from all Btn
+const removeActiveClass = () => {
+  const activeBtn = document.getElementsByClassName("active");
+  for (let btn of activeBtn) {
+    btn.classList.remove("active");
+  }
+};
+
 // loading category button
 function loadCategoryBtn() {
   fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -11,19 +19,24 @@ const displayCategoryBtn = (categories) => {
   categories.forEach((cate) => {
     const buttonDiv = document.createElement("div");
     buttonDiv.innerHTML = `
-        <button onclick = "loadVideosByCategory(${cate.category_id})" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${cate.category}</button>
+        <button id="btn-${cate.category_id}" onclick = "loadVideosByCategory(${cate.category_id})" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${cate.category}</button>
     `;
     categoryContainer.append(buttonDiv);
   });
 };
 
-// loading videos by category
+// loading videos by category and active class functionality
 const loadVideosByCategory = (categoryId) => {
   fetch(
     `https://openapi.programming-hero.com/api/phero-tube/category/${categoryId}`
   )
     .then((res) => res.json())
-    .then((data) => displayVideoByCategory(data.category));
+    .then((data) => {
+      removeActiveClass();
+      const clickedButton = document.getElementById(`btn-${categoryId}`);
+      clickedButton.classList.add("active");
+      displayVideoByCategory(data.category);
+    });
 };
 
 // displayVideoByCategory
@@ -42,10 +55,16 @@ const displayVideoByCategory = (videosByCategory) => {
 };
 
 // loading videos
+// button all functionality
 function loadVideos() {
   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then((res) => res.json())
-    .then((data) => displayVideos(data.videos));
+    .then((data) => {
+      removeActiveClass();
+      const btnAll = document.getElementById("btn-all");
+      btnAll.classList.add("active");
+      displayVideos(data.videos);
+    });
 }
 
 // displaying videos
