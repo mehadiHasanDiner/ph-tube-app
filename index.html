@@ -22,7 +22,18 @@
         <nav class="w-11/12 mx-auto flex justify-between items-center border-b-2 py-5 border-[#17171720]"
             id="header-container">
             <div class="logo w-[120px]"><img src="./assets/Logo.png" alt=""></div>
-            <div class="sort"><button class="btn">Sort by view</button></div>
+            <div class="sort">
+                <label class="input">
+                    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+                    <input id="search-input" type="search" required placeholder="Search" />
+                </label>
+            </div>
             <div class="blogs"><button class="btn bg-[#FF1F3D] text-white">Blog</button></div>
         </nav>
 
@@ -32,6 +43,10 @@
         </nav>
     </header>
 
+    <section id="loader" class="text-center py-20 hidden">
+        <span class="loading loading-spinner loading-xl"></span>
+    </section>
+
     <section id="display-videos" class="w-11/12 mx-auto grid grid-cols-4 gap-5">
 
         <div class="py-20 col-span-full flex flex-col justify-center items-center text-center">
@@ -40,6 +55,22 @@
         </div>
 
     </section>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+    <dialog id="video_details" class="modal">
+        <div class="modal-box">
+            <div id="video-details-container">
+
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
 
 
 
